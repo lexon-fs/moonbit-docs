@@ -28,8 +28,8 @@ const rehypeShikiPlugin = [
 ]
 
 const config: Config = {
-  title: 'Programming with MoonBit: A Modern Approach',
-  tagline: 'Dinosaurs are cool',
+  title: 'MoonBit Docs',
+  tagline: 'MoonBit Docs',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
