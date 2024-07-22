@@ -10,9 +10,9 @@ git clone https://github.com/moonbitlang/moonbit-docs.git
 
 ## Installation
 
-   ```
-   pnpm install
-   ```
+```
+pnpm install
+```
 
 ## Local Development
 
