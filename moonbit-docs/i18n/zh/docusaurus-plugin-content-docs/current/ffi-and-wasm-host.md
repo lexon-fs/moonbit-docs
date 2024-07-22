@@ -64,22 +64,13 @@ fn begin_path(self: Canvas_ctx) = "canvas" "begin_path"
 {
   "link": {
     "wasm": {
-      "exports": [
-        "add",
-        "fib:test"
-      ]
+      "exports": ["add", "fib:test"]
     },
     "wasm-gc": {
-      "exports": [
-        "add",
-        "fib:test"
-      ]
+      "exports": ["add", "fib:test"]
     },
     "js": {
-      "exports": [
-        "add",
-        "fib:test"
-      ],
+      "exports": ["add", "fib:test"],
       "format": "esm"
     }
   }
@@ -103,11 +94,11 @@ fn begin_path(self: Canvas_ctx) = "canvas" "begin_path"
 例如，在 JavaScript 中使用包含上述代码片段编译的 Wasm：
 
 ```js
-WebAssembly.instantiateStreaming(fetch("xxx.wasm"), {
+WebAssembly.instantiateStreaming(fetch('xxx.wasm'), {
   Math: {
-    cos: (d) => Math.cos(d),
-  },
-});
+    cos: (d) => Math.cos(d)
+  }
+})
 ```
 
 具体信息可以查阅嵌入 Wasm 的宿主环境的文档，例如[MDN](https://developer.mozilla.org/en-US/docs/WebAssembly)。
@@ -177,19 +168,20 @@ pub fn display_pi() -> Unit {
       // TODO
     }
 
-    const canvas = document.getElementById("canvas");
+    const canvas = document.getElementById('canvas')
     if (canvas.getContext) {
-      const ctx = canvas.getContext("2d");
-      WebAssembly.instantiateStreaming(fetch("target/wasm-gc/release/build/lib/lib.wasm"), importObject).then(
-        (obj) => {
-          // 总是调用_start来初始化环境
-          obj.instance.exports._start();
-          // 将JS对象当作参数传递以绘制笑脸
-          obj.instance.exports["draw"](ctx);
-          // 显示PI的值
-          obj.instance.exports["display_pi"]();
-        }
-      );
+      const ctx = canvas.getContext('2d')
+      WebAssembly.instantiateStreaming(
+        fetch('target/wasm-gc/release/build/lib/lib.wasm'),
+        importObject
+      ).then((obj) => {
+        // 总是调用_start来初始化环境
+        obj.instance.exports._start()
+        // 将JS对象当作参数传递以绘制笑脸
+        obj.instance.exports['draw'](ctx)
+        // 显示PI的值
+        obj.instance.exports['display_pi']()
+      })
     }
   </script>
 </html>
@@ -208,15 +200,14 @@ function prototype_to_ffi(prototype) {
         if (typeof value.value == 'function')
           return [key, Function.prototype.call.bind(value.value)]
         // TODO: 我们也可以将属性转化为getter和setter
-        else
-          return [key, () => value.value]
+        else return [key, () => value.value]
       })
-  );
+  )
 }
 
 const importObject = {
   canvas: prototype_to_ffi(CanvasRenderingContext2D.prototype),
-  math: prototype_to_ffi(Math),
+  math: prototype_to_ffi(Math)
   // ...
 }
 ```
@@ -225,103 +216,114 @@ const importObject = {
 
 ```javascript
 const [log, flush] = (() => {
-  var buffer = [];
+  var buffer = []
   function flush() {
     if (buffer.length > 0) {
-      console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()));
-      buffer = [];
+      console.log(
+        new TextDecoder('utf-16').decode(new Uint16Array(buffer).valueOf())
+      )
+      buffer = []
     }
   }
   function log(ch) {
-    if (ch == '\n'.charCodeAt(0)) { flush(); }
-    else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
-    else { buffer.push(ch); }
+    if (ch == '\n'.charCodeAt(0)) {
+      flush()
+    } else if (ch == '\r'.charCodeAt(0)) {
+      /* noop */
+    } else {
+      buffer.push(ch)
+    }
   }
   return [log, flush]
-})();
+})()
 
 const importObject = {
   // ...
   spectest: {
     print_char: log
-  },
+  }
 }
 
 // ...
-WebAssembly.instantiateStreaming(fetch("target/wasm-gc/release/build/lib/lib.wasm"), importObject).then(
-  (obj) => {
-    obj.instance.exports._start();
-    // ...
-    flush()
-  }
-);
+WebAssembly.instantiateStreaming(
+  fetch('target/wasm-gc/release/build/lib/lib.wasm'),
+  importObject
+).then((obj) => {
+  obj.instance.exports._start()
+  // ...
+  flush()
+})
 ```
 
 现在我们可以把之前的内容结合起来，获得我们最终的`index.html`：
 
 ```html title="./index.html
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head></head>
 
-<head></head>
+  <body>
+    <canvas id="canvas" width="150" height="150"></canvas>
+    <script>
+      function prototype_to_ffi(prototype) {
+        return Object.fromEntries(
+          Object.entries(Object.getOwnPropertyDescriptors(prototype))
+            .filter(([_key, value]) => value.value)
+            .map(([key, value]) => {
+              if (typeof value.value == 'function')
+                return [key, Function.prototype.call.bind(value.value)]
+              else return [key, () => value.value]
+            })
+        )
+      }
 
-<body>
-  <canvas id="canvas" width="150" height="150"></canvas>
-  <script>
-    function prototype_to_ffi(prototype) {
-      return Object.fromEntries(
-        Object.entries(Object.getOwnPropertyDescriptors(prototype))
-          .filter(([_key, value]) => value.value)
-          .map(([key, value]) => {
-            if (typeof value.value == 'function')
-              return [key, Function.prototype.call.bind(value.value)]
-            else
-              return [key, () => value.value]
-          })
-      );
-    }
+      const [log, flush] = (() => {
+        var buffer = []
+        function flush() {
+          if (buffer.length > 0) {
+            console.log(
+              new TextDecoder('utf-16').decode(
+                new Uint16Array(buffer).valueOf()
+              )
+            )
+            buffer = []
+          }
+        }
+        function log(ch) {
+          if (ch == '\n'.charCodeAt(0)) {
+            flush()
+          } else if (ch == '\r'.charCodeAt(0)) {
+            /* noop */
+          } else {
+            buffer.push(ch)
+          }
+        }
+        return [log, flush]
+      })()
 
-    const [log, flush] = (() => {
-      var buffer = [];
-      function flush() {
-        if (buffer.length > 0) {
-          console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()));
-          buffer = [];
+      const importObject = {
+        canvas: prototype_to_ffi(CanvasRenderingContext2D.prototype),
+        math: prototype_to_ffi(Math),
+        spectest: {
+          print_char: log
         }
       }
-      function log(ch) {
-        if (ch == '\n'.charCodeAt(0)) { flush(); }
-        else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
-        else { buffer.push(ch); }
-      }
-      return [log, flush]
-    })();
 
-
-
-    const importObject = {
-      canvas: prototype_to_ffi(CanvasRenderingContext2D.prototype),
-      math: prototype_to_ffi(Math),
-      spectest: {
-        print_char: log
-      },
-    }
-
-    const canvas = document.getElementById("canvas");
-    if (canvas.getContext) {
-      const ctx = canvas.getContext("2d");
-      WebAssembly.instantiateStreaming(fetch("target/wasm-gc/release/build/lib/lib.wasm"), importObject).then(
-        (obj) => {
-          obj.instance.exports._start();
-          obj.instance.exports["draw"](ctx);
-          obj.instance.exports["display_pi"]();
+      const canvas = document.getElementById('canvas')
+      if (canvas.getContext) {
+        const ctx = canvas.getContext('2d')
+        WebAssembly.instantiateStreaming(
+          fetch('target/wasm-gc/release/build/lib/lib.wasm'),
+          importObject
+        ).then((obj) => {
+          obj.instance.exports._start()
+          obj.instance.exports['draw'](ctx)
+          obj.instance.exports['display_pi']()
           flush()
-        }
-      );
-    }
-  </script>
-</body>
-
+        })
+      }
+    </script>
+  </body>
 </html>
 ```
 

@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises'
 import * as utils from '../lib/utils.js'
-import path from 'node:path';
-import * as process from "process";
+import path from 'node:path'
+import * as process from 'process'
 
-(async () => {
+;(async () => {
   const githubStars = await utils.getGithubStars()
   const contributors = await utils.getContributors()
   const commitCount = await utils.getCommitCount()
@@ -28,7 +28,7 @@ import * as process from "process";
     hasDir = false
   }
   if (!hasDir) {
-    await fs.mkdir(dir);
+    await fs.mkdir(dir)
   }
   console.log(data)
   await fs.writeFile(path.join(process.cwd(), 'data', 'data.json'), data)

@@ -10,7 +10,7 @@ const rehypeShikiPlugin = [
   {
     themes: {
       light: 'github-light',
-      dark: 'github-dark',
+      dark: 'github-dark'
     },
     langs: [
       ...(Object.keys(bundledLanguages) as Array<
@@ -24,8 +24,8 @@ const rehypeShikiPlugin = [
     onError: (error) => {
       console.log(error)
     }
-  } as RehypeShikiOptions,
-];
+  } as RehypeShikiOptions
+]
 
 const config: Config = {
   title: 'Programming with MoonBit: A Modern Approach',
@@ -51,7 +51,7 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'zh'],
+    locales: ['en', 'zh']
   },
 
   presets: [
@@ -65,10 +65,10 @@ const config: Config = {
           rehypePlugins: [rehypeShikiPlugin]
         },
         theme: {
-          customCss: './src/css/custom.css',
-        },
-      } satisfies Preset.Options,
-    ],
+          customCss: './src/css/custom.css'
+        }
+      } satisfies Preset.Options
+    ]
   ],
   plugins: [],
 
@@ -84,7 +84,7 @@ const config: Config = {
       },
       items: [
         {
-          to: "/",
+          to: '/',
           position: 'left',
           label: 'Docs',
           locale: ['en', 'zh']
@@ -304,9 +304,9 @@ const config: Config = {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
-  } satisfies Preset.ThemeConfig,
-};
+      darkTheme: prismThemes.dracula
+    }
+  } satisfies Preset.ThemeConfig
+}
 
-export default config;
+export default config

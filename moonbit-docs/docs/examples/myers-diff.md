@@ -22,7 +22,7 @@ index 99f4c4c..52b1388 100644
 
 But how exactly do we calculate the differences between two text files?
 
-git's default diff algorithm was proposed by *Eugene W. Myers* in his paper **An O(ND) Difference Algorithm and Its Variations**. This paper mainly focuses on proving the correctness of the algorithm. In the following text, we will understand the basic framework of this algorithm in a less rigorous way and use MoonBit to write a simple implementation.
+git's default diff algorithm was proposed by _Eugene W. Myers_ in his paper **An O(ND) Difference Algorithm and Its Variations**. This paper mainly focuses on proving the correctness of the algorithm. In the following text, we will understand the basic framework of this algorithm in a less rigorous way and use MoonBit to write a simple implementation.
 
 ## Defining "Difference" and Its Measurement Criteria
 
@@ -101,7 +101,7 @@ In fact, it is one of the shortest edit sequences that can transform text a into
   struct RHSet[T] {
     set : RHTable[T, Unit]
 + }
-+ 
++
 + fn RHSet::new[T](capacity : Int) -> RHSet[T] {
 +  let set : RHTable[T, Unit]= RHTable::new(capacity)
 +  { set : set }
@@ -162,9 +162,9 @@ The upper left of this grid is the starting point `(0, 0)`, and the lower right 
 
 Before writing the actual search code, let's manually perform two rounds of searching:
 
-+ The first round starts at `(0, 0)` and moves one step to reach `(0,1)` and `(1,0)`.
+- The first round starts at `(0, 0)` and moves one step to reach `(0,1)` and `(1,0)`.
 
-+ The second round starts at `(0,1)` and `(1,0)`. From `(0,1)`, moving down reaches `(0,2)`, but there is a diagonal line leading to `(1,3)`, so the final point is `(1,3)`.
+- The second round starts at `(0,1)` and `(1,0)`. From `(0,1)`, moving down reaches `(0,2)`, but there is a diagonal line leading to `(1,3)`, so the final point is `(1,3)`.
 
 The entire Myers algorithm is based on this kind of breadth-first search.
 
@@ -174,11 +174,11 @@ We have outlined the basic idea, now it's time to consider the design in detail.
 
 The implementation of the Myers algorithm adopts a clever approach by defining a new coordinate `k = x - y`.
 
-+ Moving right increases `k` by one.
+- Moving right increases `k` by one.
 
-+ Moving left decreases `k` by one.
+- Moving left decreases `k` by one.
 
-+ Moving diagonally down-left keeps `k` unchanged.
+- Moving diagonally down-left keeps `k` unchanged.
 
 Let's define another coordinate `d` to represent the depth of the search. Using `d` as the horizontal axis and `k` as the vertical axis, we can draw a tree diagram of the search process.
 
@@ -310,12 +310,11 @@ if d == 0 { // When d equals 0, k must also equal 0
 
 When `d > 0`, the coordinate information stored from the previous round is required. When we know the `k` value of a point and the coordinates of the points from the previous round of searching, the value of `v[k]` is easy to deduce. Because with each step k can only increase or decrease by one, `v[k]` in the search tree must extend from either `v[k - 1]` or `v[k + 1]`. The next question is: how to choose between the two paths ending at `v[k - 1]` and `v[k + 1]`?
 
-
 There are two boundary cases: `k == -d` and `k == d`.
 
-+ When `k == -d`, you can only choose `v[k + 1]`.
+- When `k == -d`, you can only choose `v[k + 1]`.
 
-+ When `k == -d`, you can only choose `v[k - 1]`.
+- When `k == -d`, you can only choose `v[k - 1]`.
 
 Recalling the requirement mentioned earlier: arranging deletions before insertions as much as possible, this essentially means choosing the position with the largest `x` value from the previous position.
 
@@ -386,6 +385,6 @@ We have implemented an incomplete version of Myers' algorithm, which completes t
 
 This article references:
 
-+ [https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/](https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/)
+- [https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/](https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/)
 
 Thanks to the author James Coglan.

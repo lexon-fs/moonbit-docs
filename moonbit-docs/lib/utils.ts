@@ -1,7 +1,5 @@
 async function getGithubStars() {
-  return await fetch(
-    'https://api.github.com/repos/moonbitlang/moonbit-docs'
-  )
+  return await fetch('https://api.github.com/repos/moonbitlang/moonbit-docs')
     .then((res) => res.json())
     .then((data) => data.watchers_count)
 }

@@ -1,18 +1,18 @@
-import React from 'react';
-import {useColorMode, useThemeConfig} from '@docusaurus/theme-common';
-import ColorModeToggle from '@theme/ColorModeToggle';
-import type {Props} from '@theme/Navbar/ColorModeToggle';
-import styles from './styles.module.css';
+import React from 'react'
+import { useColorMode, useThemeConfig } from '@docusaurus/theme-common'
+import ColorModeToggle from '@theme/ColorModeToggle'
+import type { Props } from '@theme/Navbar/ColorModeToggle'
+import styles from './styles.module.css'
 
 export default function NavbarColorModeToggle({
-  className,
+  className
 }: Props): JSX.Element | null {
-  const navbarStyle = useThemeConfig().navbar.style;
-  const disabled = useThemeConfig().colorMode.disableSwitch;
-  const {colorMode, setColorMode} = useColorMode();
+  const navbarStyle = useThemeConfig().navbar.style
+  const disabled = useThemeConfig().colorMode.disableSwitch
+  const { colorMode, setColorMode } = useColorMode()
 
   if (disabled) {
-    return null;
+    return null
   }
 
   return (
@@ -24,5 +24,5 @@ export default function NavbarColorModeToggle({
       value={colorMode}
       onChange={setColorMode}
     />
-  );
+  )
 }

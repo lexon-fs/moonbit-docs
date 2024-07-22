@@ -1,8 +1,8 @@
-import type {ComponentProps} from 'react';
-import React from 'react';
-import CodeBlock from '../CodeBlock';
-import CodeInline from '@theme/CodeInline';
-import type {Props} from '@theme/MDXComponents/Code';
+import type { ComponentProps } from 'react'
+import React from 'react'
+import CodeBlock from '../CodeBlock'
+import CodeInline from '@theme/CodeInline'
+import type { Props } from '@theme/MDXComponents/Code'
 
 function shouldBeInline(props: Props) {
   return (
@@ -10,9 +10,9 @@ function shouldBeInline(props: Props) {
     // see https://github.com/facebook/docusaurus/pull/9704
     typeof props.children !== 'undefined' &&
     React.Children.toArray(props.children).every(
-      (el) => typeof el === 'string' && !el.includes('\n'),
+      (el) => typeof el === 'string' && !el.includes('\n')
     )
-  );
+  )
 }
 
 export default function MDXCode(props: Props): JSX.Element {
@@ -20,5 +20,5 @@ export default function MDXCode(props: Props): JSX.Element {
     <CodeInline {...props} />
   ) : (
     <CodeBlock {...(props as ComponentProps<typeof CodeBlock>)} />
-  );
+  )
 }

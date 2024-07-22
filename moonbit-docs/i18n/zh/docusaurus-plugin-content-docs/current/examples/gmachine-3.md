@@ -1,6 +1,5 @@
 本期文章为在MoonBit中实现惰性求值的第三篇。在上一篇中，我们了解了let表达式的编译方法以及如何实现基本的算术比较操作。这一篇文章中，我们将实现一种基于上下文的优化方法，并添加对数据结构的支持。
 
-
 ## 追踪上下文
 
 回顾一下我们之前实现primitive的方法：
@@ -35,11 +34,11 @@ let compiledPrimitives : List[(String, Int, List[Instruction])] = List::[
 
 一种可行的优化方法是在编译表达式时注意其上下文。例如，add需要它的参数被求值成WHNF，那么它的参数在编译时就处于严格(Strict)上下文中。通过这种方式，我们可以识别出一部分可以安全地按照严格求值进行编译的表达式(仅有一部分)
 
-+ 一个超组合子定义中的表达式处于严格上下文中
+- 一个超组合子定义中的表达式处于严格上下文中
 
-+ 如果`(op e1 e2)`处于严格上下文中(此处`op`是一个primitive)，那么`e1`和`e2`也处于严格上下文中
+- 如果`(op e1 e2)`处于严格上下文中(此处`op`是一个primitive)，那么`e1`和`e2`也处于严格上下文中
 
-+ 如果`(let (.....) e)`处于严格上下文中，那么`e`也处于严格上下文中(但是前面的局部变量对应的表达式就不是，因为e不一定需要它们的结果)
+- 如果`(let (.....) e)`处于严格上下文中，那么`e`也处于严格上下文中(但是前面的局部变量对应的表达式就不是，因为e不一定需要它们的结果)
 
 我们用函数`compileE`实现这种严格求值上下文下的编译，它所生成的指令可以保证*栈顶地址指向的值一定是一个WHNF*。
 
@@ -86,13 +85,13 @@ App(Var("negate"), e) => {
 ```rust
 let builtinOpS : RHTable[String, Instruction] = {
   let table : RHTable[String, Instruction] = RHTable::new(50)
-  table["add"] = Add 
+  table["add"] = Add
   table["mul"] = Mul
   table["sub"] = Sub
   table["div"] = Div
   table["eq"]  = Eq
   table["neq"] = Ne
-  table["ge"] = Ge 
+  table["ge"] = Ge
   table["gt"] = Gt
   table["le"] = Le
   table["lt"] = Lt
@@ -164,8 +163,8 @@ NGlobal(_, n, c) => {
 
 我们自顶向下地分析应该怎么翻译成布尔函数
 
-+ 对于`(if x y z)`而言，`x`是一定需要计算的，但`y`和`z`只需要计算一个，那么它被翻译成`x and (y or z)`。以上面这个函数为例说明，如果`n`是bottom, 那么条件`(lt n 0)`也是bottom，则整个表达式的结果也是bottom。
-+ 对于primitive直接全用and就好
+- 对于`(if x y z)`而言，`x`是一定需要计算的，但`y`和`z`只需要计算一个，那么它被翻译成`x and (y or z)`。以上面这个函数为例说明，如果`n`是bottom, 那么条件`(lt n 0)`也是bottom，则整个表达式的结果也是bottom。
+- 对于primitive直接全用and就好
 
 那么判断一个参数是否需要严格地编译，只需要把上面的条件翻译成布尔函数版：`a[i] = false`则`f a[1] .... a[i] .... a[n] = false`(其他参数都是true)。
 
@@ -180,8 +179,8 @@ haskell中的数据结构类型定义与MoonBit的enum相仿，不过，由于Co
   (case l
     [(Nil) Nil]
     [(Cons x xs)
-      (if (le n 0) 
-        Nil 
+      (if (le n 0)
+        Nil
         (Cons x (take (sub n 1) xs)))]))
 ```
 
@@ -189,9 +188,9 @@ haskell中的数据结构类型定义与MoonBit的enum相仿，不过，由于Co
 
 列表对应的图节点是`NConstr(Int, List[Addr])`, 它由两个部分组成：
 
-+ 用于标记不同值构造子的标签，Nil对应的标签是0，Cons对应的标签是1
+- 用于标记不同值构造子的标签，Nil对应的标签是0，Cons对应的标签是1
 
-+ 用于存放子结构地址的列表，它的长度对应一个值构造子的参数数量(arity)
+- 用于存放子结构地址的列表，它的长度对应一个值构造子的参数数量(arity)
 
 > 这个图节点的结构可以用来实现各种数据结构，但是coreF没做类型系统，为了演示方便只实现了惰性列表
 
@@ -226,7 +225,7 @@ fn casejump(self : GState, table : List[(Int, List[Instruction])]) -> Unit {
     NConstr(t, addrs) => {
       match lookupENV(table, t) {
         None => abort("casejump")
-        Some(instrs) => { 
+        Some(instrs) => {
           self.code = instrs + self.code
           self.putStack(addr)
         }
@@ -242,7 +241,7 @@ fn casejump(self : GState, table : List[(Int, List[Instruction])]) -> Unit {
 ```rust
 // compileE
   Case(e, alts) => {
-    compileE(e, env) + List::[CaseJump(compileAlts(alts, env))] 
+    compileE(e, env) + List::[CaseJump(compileAlts(alts, env))]
   }
   Constructor(0, 0) => {
     // Nil
@@ -304,28 +303,28 @@ let initialCode : List[Instruction] = List::[PushGlobal("main"), Eval, Print]
 
 在引入数据结构之后，严格性分析也会变得更复杂。以惰性列表为例，关于它有多种求值模式
 
-+ 完全严格(要求列表有限并且所有元素都不是bottom)
-+ 完全惰性
-+ 头严格(列表可以无限，但是里面的元素不可以有bottom)
-+ 尾严格(列表必须有限，但是里面的元素可以有bottom)
+- 完全严格(要求列表有限并且所有元素都不是bottom)
+- 完全惰性
+- 头严格(列表可以无限，但是里面的元素不可以有bottom)
+- 尾严格(列表必须有限，但是里面的元素可以有bottom)
 
 甚至函数所处的上下文也会改变它对某个参数的求值模式(不能孤立地分析，需要跨函数)，这种较为复杂的严格性分析一般采用射影分析(Projection Analysis)技术，相关文献：
 
-+ Projections for Strictness Analysis
+- Projections for Strictness Analysis
 
-+ Static Analysis and Code Optimizations in Glasgow Haskell Compiler
+- Static Analysis and Code Optimizations in Glasgow Haskell Compiler
 
-+ Implementing Projection-based Strictness Analysis
+- Implementing Projection-based Strictness Analysis
 
-+ Theory and Practice of Demand Analysis in Haskell
+- Theory and Practice of Demand Analysis in Haskell
 
 ## 尾声
 
 惰性求值这一技术可以减少运行时的重复运算，与此同时它也引入了一些新的问题。这些问题包括：
 
-+ 臭名昭著的副作用顺序问题。
+- 臭名昭著的副作用顺序问题。
 
-+ 冗余节点过多。一些根本不会共享的计算也要把结果放到堆上，这对于利用CPU的缓存机制是不利的。
+- 冗余节点过多。一些根本不会共享的计算也要把结果放到堆上，这对于利用CPU的缓存机制是不利的。
 
 惰性求值语言的代表haskell对于副作用顺序给出了一个毁誉参半的解决方案：Monad。该方案对急切求值的语言也有一定价值，但网络上关于它的教程往往在介绍此概念时过分强调其数学背景，对如何使用反而疏于讲解。笔者建议不必在这方面花费过多时间。
 

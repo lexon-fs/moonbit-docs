@@ -20,7 +20,6 @@
 
 ### name
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -36,11 +35,7 @@
   </tbody>
 </table>
 
-
-
-
 ### version
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -113,7 +108,6 @@
 
 ### license
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -130,6 +124,7 @@
 </table>
 
 ### Schema
+
 ```
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -189,7 +184,6 @@
 
 ### name
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -205,11 +199,7 @@
   </tbody>
 </table>
 
-
-
-
 ### is-main
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -226,11 +216,7 @@
   </tbody>
 </table>
 
-
-
-
 ### import
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -247,10 +233,7 @@
   </tbody>
 </table>
 
-
-
 #### import.0
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -263,11 +246,7 @@
   </tbody>
 </table>
 
-
-
-
 #### import.1
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -282,7 +261,6 @@
 
 ### link
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr><tr><th rowspan="2">Type</th><td rowspan="2">One of:</td><td>Boolean</td></tr><tr><td>Object</td></tr></tr>
@@ -294,10 +272,7 @@
   </tbody>
 </table>
 
-
-
 #### link.0
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -310,11 +285,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -331,10 +302,7 @@
   </tbody>
 </table>
 
-
-
 #### link.1.wasm
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -342,12 +310,9 @@
     
   </tbody>
 </table>
-
-
 
 #### link.1.wasm.exports
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -358,13 +323,9 @@
     
   </tbody>
 </table>
-
-
-
 
 #### link.1.wasm.export-memory-name
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -375,13 +336,9 @@
     
   </tbody>
 </table>
-
-
-
 
 #### link.1.wasm.flags
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -393,12 +350,7 @@
   </tbody>
 </table>
 
-
-
-
-
 #### link.1.wasm-gc
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -407,10 +359,7 @@
   </tbody>
 </table>
 
-
-
 #### link.1.wasm-gc.exports
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -423,11 +372,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1.wasm-gc.export-memory-name
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -440,11 +385,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1.wasm-gc.flags
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -457,12 +398,7 @@
   </tbody>
 </table>
 
-
-
-
-
 #### link.1.js
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -471,10 +407,7 @@
   </tbody>
 </table>
 
-
-
 #### link.1.js.exports
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -487,11 +420,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1.js.format
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -508,6 +437,7 @@
 </table>
 
 ### Schema
+
 ```
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -671,5 +601,3 @@
     "required": []
 }
 ```
-
-

@@ -7,7 +7,6 @@ To add a new document to the Moonbit documentation site, follow these steps:
 
 1. Create and Move Your Markdown File
    For English Documents:
-   
 2. Create a new Markdown file with your document content.
    Move it to the appropriate location within the English documentation folder:
 
@@ -16,6 +15,7 @@ moonbit-docs\docs\your\english\path\yourenglishdocs.md
 ```
 
 For Chinese Documents:
+
 1. Create a new Markdown file with your document content in Chinese.
 2. Move it to the corresponding location within the Chinese documentation folder, mirroring the English folder structure:
 
@@ -30,16 +30,19 @@ moonbit-docs\i18n\zh\docusaurus-plugin-content-docs\current\your\english\path\yo
 After creating your document, you need to add a link to it in the sidebar configuration file to make it appear in the documentation sidebar.
 
 1. Open the sidebar.ts file located at:
+
 ```shell
 moonbit-docs/sidebar.ts
 ```
+
 2. Add a link to your new document by following the sidebar [configuration guide](https://docusaurus.io/docs/sidebar/items).
 
-
 ## 3. Preview Your Document
+
 **For the English Site:**
 
 To see the English version of your document:
+
 ```shell
 cd moonbit-docs
 pnpm start

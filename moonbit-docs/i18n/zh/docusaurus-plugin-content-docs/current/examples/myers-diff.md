@@ -25,7 +25,7 @@ index 99f4c4c..52b1388 100644
 
 但是，究竟怎样计算出两个文本文件的差别呢？
 
-git 的默认 diff 算法是 **Eugene W. Myers**在他的论文***An O(ND) Difference Algorithm and Its Variations*** 中所提出的，这篇论文的 pdf 可以在网上找到，但论文内容主要集中于证明该算法的正确性。
+git 的默认 diff 算法是 **Eugene W. Myers**在他的论文**_An O(ND) Difference Algorithm and Its Variations_** 中所提出的，这篇论文的 pdf 可以在网上找到，但论文内容主要集中于证明该算法的正确性。
 
 在下文中，我们将以不那么严谨的方式了解该算法的基本框架，并且使用 MoonBit 编写该算法的一个简单实现。
 
@@ -301,7 +301,7 @@ fn shortst_edit(a : Array[Line], b : Array[Line]) -> Int {
 
 ```
 
-通过最极端的情况(两段文本没有相同的行)可以推出最多需要搜索n + m步，最少需要搜索0步。故设变量max = n + m。数组v是以k为索引保存x值的历史记录，因为k的范围是[-d, d]，这个数组的大小被设为2 * max + 1。
+通过最极端的情况(两段文本没有相同的行)可以推出最多需要搜索n + m步，最少需要搜索0步。故设变量max = n + m。数组v是以k为索引保存x值的历史记录，因为k的范围是[-d, d]，这个数组的大小被设为2 \* max + 1。
 
 但即使到了这一步，接下来该怎么做还是挺不好想，所以我们暂且只考虑d = 0; k = 0的情况。此时一定在(0, 0)点。同时，假如两段文本的开头相同，那就允许直接跳过。我们将这一轮的最终坐标写入数组v。
 
@@ -396,6 +396,6 @@ fn shortst_edit(a : Array[Line], b : Array[Line]) -> Int {
 
 我们实现了一个不完整的myers算法，它完成了正向的路径搜索，在下一篇文章中，我们将实现回溯，还原出完整的编辑路径，并写一个可以输出彩色diff的打印函数。
 
-本篇文章参考了：*[The Myers diff algorithm: part 2](https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/)*
+本篇文章参考了：_[The Myers diff algorithm: part 2](https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/)_
 
 感谢这篇博客的作者James Coglan。

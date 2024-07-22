@@ -20,7 +20,6 @@
 
 ### name
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -37,7 +36,6 @@
 </table>
 
 ### version
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -110,7 +108,6 @@
 
 ### license
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -127,6 +124,7 @@
 </table>
 
 ### Schema
+
 ```
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -185,7 +183,6 @@
 
 ### name
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -201,11 +198,7 @@
   </tbody>
 </table>
 
-
-
-
 ### is-main
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -222,11 +215,7 @@
   </tbody>
 </table>
 
-
-
-
 ### import
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -243,10 +232,7 @@
   </tbody>
 </table>
 
-
-
 #### import.0
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -259,11 +245,7 @@
   </tbody>
 </table>
 
-
-
-
 #### import.1
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -278,7 +260,6 @@
 
 ### link
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr><tr><th rowspan="2">类型</th><td rowspan="2">其中之一：</td><td>布尔值</td></tr><tr><td>对象</td></tr></tr>
@@ -290,10 +271,7 @@
   </tbody>
 </table>
 
-
-
 #### link.0
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -306,11 +284,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -327,10 +301,7 @@
   </tbody>
 </table>
 
-
-
 #### link.1.wasm
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -338,12 +309,9 @@
     
   </tbody>
 </table>
-
-
 
 #### link.1.wasm.exports
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -354,13 +322,9 @@
     
   </tbody>
 </table>
-
-
-
 
 #### link.1.wasm.export-memory-name
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -371,13 +335,9 @@
     
   </tbody>
 </table>
-
-
-
 
 #### link.1.wasm.flags
 
-
 <table class="jssd-property-table">
   <tbody>
     <tr>
@@ -389,12 +349,7 @@
   </tbody>
 </table>
 
-
-
-
-
 #### link.1.wasm-gc
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -403,10 +358,7 @@
   </tbody>
 </table>
 
-
-
 #### link.1.wasm-gc.exports
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -419,11 +371,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1.wasm-gc.export-memory-name
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -436,11 +384,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1.wasm-gc.flags
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -453,12 +397,7 @@
   </tbody>
 </table>
 
-
-
-
-
 #### link.1.js
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -467,10 +406,7 @@
   </tbody>
 </table>
 
-
-
 #### link.1.js.exports
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -483,11 +419,7 @@
   </tbody>
 </table>
 
-
-
-
 #### link.1.js.format
-
 
 <table class="jssd-property-table">
   <tbody>
@@ -505,6 +437,7 @@
 ### 模式
 
 ### Schema
+
 ```
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -668,6 +601,3 @@
     "required": []
 }
 ```
-
-
-

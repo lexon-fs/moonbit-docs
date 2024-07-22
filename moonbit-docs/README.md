@@ -10,7 +10,7 @@ git clone https://github.com/moonbitlang/moonbit-docs.git
 
 ## Installation
 
-1. please copy the file ` .npmrc.example`  to `.npmrc`
+1. please copy the file ` .npmrc.example` to `.npmrc`
 
 1. config the token
 
@@ -73,9 +73,11 @@ $ pnpm buildzh
 This command generates chinese static content into the `build` directory and can be served using any static contents hosting service.It will overwrite the `build` code generation.If you run the `build` command before.
 
 Switch to the `build` fold and then you can use:
+
 ```shell
 pnpm run serve
 ```
+
 To start the production server after build.
 
 ## Swizzle
@@ -87,4 +89,5 @@ pnpm swizzleClassic
 This command generates the rewrite theme components code,the theme components are in the `@docusaurus/theme-classic`,if you want to custom components of this theme,you can run it.
 
 ## How to use
+
 please see the `docs` at project fold before you add the new moonbit docs.

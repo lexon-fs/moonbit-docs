@@ -51,9 +51,7 @@ API token saved to ~/.moon/credentials.json
 ```json
 {
   "is_main": true,
-  "import": [
-    { "path": "Yoorkin/example/list", "alias": "ls" }
-  ]
+  "import": [{ "path": "Yoorkin/example/list", "alias": "ls" }]
 }
 ```
 
@@ -97,7 +95,7 @@ mooncakes.io 集成了 moondoc 文档生成器，所有模块的文档会被自�
 
 在每个顶层成员之前可以添加多行以`///`开头的文档注释。文档注释使用 Markdown 的语法格式：
 
-```moonbit
+````moonbit
 /// Get the largest element of a non-empty `Array`.
 ///
 /// # Example
@@ -113,6 +111,6 @@ mooncakes.io 集成了 moondoc 文档生成器，所有模块的文档会被自�
 pub fn maximum[T : Compare](xs : Array[T]) -> T {
     //TODO ...
 }
-```
+````
 
 此外，使用`moon doc --serve`可以在本地生成并预览模块的文档。

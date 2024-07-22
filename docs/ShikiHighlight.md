@@ -4,7 +4,7 @@
 
 If you encounter the following message in your console:
 
-``` log
+```log
 ShikiError: Language `xxx` not found, you may need to load it first
 ```
 

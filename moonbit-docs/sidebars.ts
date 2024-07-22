@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs'
 
 /**
  * Creating a sidebar enables you to:
@@ -16,7 +16,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'doc',
       id: 'syntax',
-      label: 'MoonBit',
+      label: 'MoonBit'
     },
     'build-system-tutorial',
     'ffi-and-wasm-host',
@@ -42,4 +42,4 @@ const sidebars: SidebarsConfig = {
   ]
 }
 
-export default sidebars;
+export default sidebars

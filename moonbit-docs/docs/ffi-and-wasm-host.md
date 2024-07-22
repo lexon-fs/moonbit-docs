@@ -64,22 +64,13 @@ Functions that are not methods nor polymorphic functions can be exported if they
 {
   "link": {
     "wasm": {
-      "exports": [
-        "add",
-        "fib:test"
-      ]
+      "exports": ["add", "fib:test"]
     },
     "wasm-gc": {
-      "exports": [
-        "add",
-        "fib:test"
-      ]
+      "exports": ["add", "fib:test"]
     },
     "js": {
-      "exports": [
-        "add",
-        "fib:test"
-      ],
+      "exports": ["add", "fib:test"],
       "format": "esm"
     }
   }
@@ -103,11 +94,11 @@ To use the compiled Wasm, you must provide **All** declared foreign functions in
 For example, to use wasm compiled from above code snippet in JavaScript:
 
 ```js
-WebAssembly.instantiateStreaming(fetch("xxx.wasm"), {
+WebAssembly.instantiateStreaming(fetch('xxx.wasm'), {
   Math: {
-    cos: (d) => Math.cos(d),
-  },
-});
+    cos: (d) => Math.cos(d)
+  }
+})
 ```
 
 Check out the documentation such as [MDN](https://developer.mozilla.org/en-US/docs/WebAssembly) or the manual of runtime that you're using to embed the Wasm.
@@ -177,19 +168,20 @@ We now can use it from JavaScript.
       // TODO
     }
 
-    const canvas = document.getElementById("canvas");
+    const canvas = document.getElementById('canvas')
     if (canvas.getContext) {
-      const ctx = canvas.getContext("2d");
-      WebAssembly.instantiateStreaming(fetch("target/wasm-gc/release/build/lib/lib.wasm"), importObject).then(
-        (obj) => {
-          // Always call _start to initialize the environment
-          obj.instance.exports._start();
-          // Pass the JS object as parameter to draw the smiling face
-          obj.instance.exports["draw"](ctx);
-          // Display the value of PI
-          obj.instance.exports["display_pi"]();
-        }
-      );
+      const ctx = canvas.getContext('2d')
+      WebAssembly.instantiateStreaming(
+        fetch('target/wasm-gc/release/build/lib/lib.wasm'),
+        importObject
+      ).then((obj) => {
+        // Always call _start to initialize the environment
+        obj.instance.exports._start()
+        // Pass the JS object as parameter to draw the smiling face
+        obj.instance.exports['draw'](ctx)
+        // Display the value of PI
+        obj.instance.exports['display_pi']()
+      })
     }
   </script>
 </html>
@@ -208,15 +200,14 @@ function prototype_to_ffi(prototype) {
         if (typeof value.value == 'function')
           return [key, Function.prototype.call.bind(value.value)]
         // TODO: it is also possible to convert properties into getters and setters
-        else
-          return [key, () => value.value]
+        else return [key, () => value.value]
       })
-  );
+  )
 }
 
 const importObject = {
   canvas: prototype_to_ffi(CanvasRenderingContext2D.prototype),
-  math: prototype_to_ffi(Math),
+  math: prototype_to_ffi(Math)
   // ...
 }
 ```
@@ -225,103 +216,114 @@ As of the printing service, we can provide the following closure so that it buff
 
 ```javascript
 const [log, flush] = (() => {
-  var buffer = [];
+  var buffer = []
   function flush() {
     if (buffer.length > 0) {
-      console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()));
-      buffer = [];
+      console.log(
+        new TextDecoder('utf-16').decode(new Uint16Array(buffer).valueOf())
+      )
+      buffer = []
     }
   }
   function log(ch) {
-    if (ch == '\n'.charCodeAt(0)) { flush(); }
-    else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
-    else { buffer.push(ch); }
+    if (ch == '\n'.charCodeAt(0)) {
+      flush()
+    } else if (ch == '\r'.charCodeAt(0)) {
+      /* noop */
+    } else {
+      buffer.push(ch)
+    }
   }
   return [log, flush]
-})();
+})()
 
 const importObject = {
   // ...
   spectest: {
     print_char: log
-  },
+  }
 }
 
 // ...
-WebAssembly.instantiateStreaming(fetch("target/wasm-gc/release/build/lib/lib.wasm"), importObject).then(
-  (obj) => {
-    obj.instance.exports._start();
-    // ...
-    flush()
-  }
-);
+WebAssembly.instantiateStreaming(
+  fetch('target/wasm-gc/release/build/lib/lib.wasm'),
+  importObject
+).then((obj) => {
+  obj.instance.exports._start()
+  // ...
+  flush()
+})
 ```
 
 Now, we put them together, so this is our final complete `index.html`:
 
 ```html title="./index.html
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head></head>
 
-<head></head>
+  <body>
+    <canvas id="canvas" width="150" height="150"></canvas>
+    <script>
+      function prototype_to_ffi(prototype) {
+        return Object.fromEntries(
+          Object.entries(Object.getOwnPropertyDescriptors(prototype))
+            .filter(([_key, value]) => value.value)
+            .map(([key, value]) => {
+              if (typeof value.value == 'function')
+                return [key, Function.prototype.call.bind(value.value)]
+              else return [key, () => value.value]
+            })
+        )
+      }
 
-<body>
-  <canvas id="canvas" width="150" height="150"></canvas>
-  <script>
-    function prototype_to_ffi(prototype) {
-      return Object.fromEntries(
-        Object.entries(Object.getOwnPropertyDescriptors(prototype))
-          .filter(([_key, value]) => value.value)
-          .map(([key, value]) => {
-            if (typeof value.value == 'function')
-              return [key, Function.prototype.call.bind(value.value)]
-            else
-              return [key, () => value.value]
-          })
-      );
-    }
+      const [log, flush] = (() => {
+        var buffer = []
+        function flush() {
+          if (buffer.length > 0) {
+            console.log(
+              new TextDecoder('utf-16').decode(
+                new Uint16Array(buffer).valueOf()
+              )
+            )
+            buffer = []
+          }
+        }
+        function log(ch) {
+          if (ch == '\n'.charCodeAt(0)) {
+            flush()
+          } else if (ch == '\r'.charCodeAt(0)) {
+            /* noop */
+          } else {
+            buffer.push(ch)
+          }
+        }
+        return [log, flush]
+      })()
 
-    const [log, flush] = (() => {
-      var buffer = [];
-      function flush() {
-        if (buffer.length > 0) {
-          console.log(new TextDecoder("utf-16").decode(new Uint16Array(buffer).valueOf()));
-          buffer = [];
+      const importObject = {
+        canvas: prototype_to_ffi(CanvasRenderingContext2D.prototype),
+        math: prototype_to_ffi(Math),
+        spectest: {
+          print_char: log
         }
       }
-      function log(ch) {
-        if (ch == '\n'.charCodeAt(0)) { flush(); }
-        else if (ch == '\r'.charCodeAt(0)) { /* noop */ }
-        else { buffer.push(ch); }
-      }
-      return [log, flush]
-    })();
 
-
-
-    const importObject = {
-      canvas: prototype_to_ffi(CanvasRenderingContext2D.prototype),
-      math: prototype_to_ffi(Math),
-      spectest: {
-        print_char: log
-      },
-    }
-
-    const canvas = document.getElementById("canvas");
-    if (canvas.getContext) {
-      const ctx = canvas.getContext("2d");
-      WebAssembly.instantiateStreaming(fetch("target/wasm-gc/release/build/lib/lib.wasm"), importObject).then(
-        (obj) => {
-          obj.instance.exports._start();
-          obj.instance.exports["draw"](ctx);
-          obj.instance.exports["display_pi"]();
+      const canvas = document.getElementById('canvas')
+      if (canvas.getContext) {
+        const ctx = canvas.getContext('2d')
+        WebAssembly.instantiateStreaming(
+          fetch('target/wasm-gc/release/build/lib/lib.wasm'),
+          importObject
+        ).then((obj) => {
+          obj.instance.exports._start()
+          obj.instance.exports['draw'](ctx)
+          obj.instance.exports['display_pi']()
           flush()
-        }
-      );
-    }
-  </script>
-</body>
-
+        })
+      }
+    </script>
+  </body>
 </html>
 ```
 

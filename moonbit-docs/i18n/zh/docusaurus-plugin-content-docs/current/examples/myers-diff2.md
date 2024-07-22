@@ -35,7 +35,7 @@ fn shortst_edit(a : Array[Line], b : Array[Line]) -> Array[(BPArray[Int], Int)] 
         x = x + 1
         y = y + 1
       }
-      
+
       v[k] = x
       if x >= n && y >= m {
         return trace
@@ -74,17 +74,17 @@ fn backtrack(a : Array[Line], b : Array[Line], trace : Array[(BPArray[Int], Int)
 
 回溯的方法和正向搜索的思路基本相同，只是把方向倒了过来。
 
-+ 通过x和y计算出当前k值
+- 通过x和y计算出当前k值
 
-+ 通过访问历史记录，用跟正向搜索时一样的判断条件找出上一轮搜索所处位置的k值
+- 通过访问历史记录，用跟正向搜索时一样的判断条件找出上一轮搜索所处位置的k值
 
-+ 还原上一轮搜索所处位置坐标
+- 还原上一轮搜索所处位置坐标
 
-+ 尝试自由移动并记录对应的编辑动作
+- 尝试自由移动并记录对应的编辑动作
 
-+ 判断导致k值改变的编辑是哪一种
+- 判断导致k值改变的编辑是哪一种
 
-+ 继续迭代
+- 继续迭代
 
 ```rust
   for i = trace.length() - 1; i >= 0; i = i - 1 {
@@ -162,8 +162,8 @@ fn print_edit(edit : Edit) -> String {
 
 fn print_diff(diff : Array[Edit]) -> Unit {
   for i = diff.length() - 1; i >= 0; i = i - 1 {
-    diff[i] 
-    |> print_edit 
+    diff[i]
+    |> print_edit
     |> println
   }
 }

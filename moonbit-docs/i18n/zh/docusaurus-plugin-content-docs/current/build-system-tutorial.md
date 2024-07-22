@@ -8,38 +8,38 @@
 
 1. **MoonBit CLI 工具**: 从[这里](https://www.moonbitlang.cn/download/)下载。该命令行工具用于创建和管理 MoonBit 项目。
 
-    使用 `moon help` 命令可查看使用说明。
+   使用 `moon help` 命令可查看使用说明。
 
-    ```bash
-    $ moon help
-    Moonbit's build system
+   ```bash
+   $ moon help
+   Moonbit's build system
 
-    Usage: moon <COMMAND>
+   Usage: moon <COMMAND>
 
-    Commands:
-      build     Build the current package
-      check     Check the current package, but don't build object files
-      run       Run WebAssembly module
-      clean     Remove the target directory
-      new       Create a new moonbit package
-      bench     Generate build matrix for benchmarking
-      fmt       Format moonbit
-      version   Print version info and exit
-      test      Run the tests
-      login     Log in to your account
-      register  Register an account on mooncakes.io
-      publish   Publish the current package
-      add       Add a new dependency
-      remove    Remove a dependency
-      tree      Display the dependency tree
-      update    Update index
-      doc       Generate documentation
-      install   Install dependencies
-      help      Print this message or the help of the given subcommand(s)
+   Commands:
+     build     Build the current package
+     check     Check the current package, but don't build object files
+     run       Run WebAssembly module
+     clean     Remove the target directory
+     new       Create a new moonbit package
+     bench     Generate build matrix for benchmarking
+     fmt       Format moonbit
+     version   Print version info and exit
+     test      Run the tests
+     login     Log in to your account
+     register  Register an account on mooncakes.io
+     publish   Publish the current package
+     add       Add a new dependency
+     remove    Remove a dependency
+     tree      Display the dependency tree
+     update    Update index
+     doc       Generate documentation
+     install   Install dependencies
+     help      Print this message or the help of the given subcommand(s)
 
-    Options:
-      -h, --help  Print help
-    ```
+   Options:
+     -h, --help  Print help
+   ```
 
 2. **Moonbit Language** Visual Studio Code 插件: 可以从 VS Code 市场安装。该插件为 MoonBit 提供了丰富的开发环境，包括语法高亮、代码补全等功能。
 
@@ -81,14 +81,13 @@ my-project
 - `lib` 和 `main` 目录：这些是模块中的包。每个包可以包含多个 `.mbt` 文件，这些文件是 MoonBit 语言的源代码文件。不过，无论包中有多少个 `.mbt` 文件，它们都共享一个公共的 `moon.pkg.json` 文件。`lib/*_test.mbt` 是 `lib` 包中独立的测试文件，在这些文件中可以直接访问 `lib` 包的私有成员。这些文件只有在测试模式下才会加入到编译中，可以在这些独立测试文件中写内联测试和供测试使用的工具函数。
 
 - `moon.pkg.json` 文件：包描述符文件。它定义了包的属性，例如该包是否为 `main` 包，以及它所导入的包。
+
   - `main/moon.pkg.json`：
 
     ```json
     {
       "is_main": true,
-      "import": [
-        "username/hello/lib"
-      ]
+      "import": ["username/hello/lib"]
     }
     ```
 
@@ -96,9 +95,9 @@ my-project
 
   - `lib/moon.pkg.json`
 
-      ```json
-      {}
-      ```
+    ```json
+    {}
+    ```
 
     内容为空，其作用只是告诉构建系统该文件夹是一个包。
 
@@ -177,9 +176,7 @@ Total tests: 1, passed: 1, failed: 0.
 ```json
 {
   "is_main": true,
-  "import": [
-    "username/hello/lib"
-  ]
+  "import": ["username/hello/lib"]
 }
 ```
 

@@ -1,15 +1,16 @@
 ---
 id: syntax
 ---
+
 # MoonBit
 
 MoonBit is an end-to-end programming language toolchain for cloud and edge computing using WebAssembly. The IDE environment is available at [https://try.moonbitlang.com](https://try.moonbitlang.com) without any installation; it does not rely on any server either.
 
 ## Status and aimed timeline
 
-It is currently alpha, experimental. We expect MoonBit to reach *beta-preview* in 02/2024 and *beta* in 06/2024.
+It is currently alpha, experimental. We expect MoonBit to reach _beta-preview_ in 02/2024 and _beta_ in 06/2024.
 
-When MoonBit reaches beta, it means any backwards-incompatible changes will be seriously evaluated and MoonBit *can* be used in production(very rare compiler bugs). MoonBit is developed by a talented full time team who had extensive experience in building language toolchains, so we will grow much faster than the typical language ecosystem, you won't wait long to use MoonBit in your production.
+When MoonBit reaches beta, it means any backwards-incompatible changes will be seriously evaluated and MoonBit _can_ be used in production(very rare compiler bugs). MoonBit is developed by a talented full time team who had extensive experience in building language toolchains, so we will grow much faster than the typical language ecosystem, you won't wait long to use MoonBit in your production.
 
 ## Main advantages
 
@@ -119,7 +120,7 @@ fn init {
 }
 ```
 
-Functions, whether named or anonymous, are *lexical closures*: any identifiers without a local binding must refer to bindings from a surrounding lexical scope. For example:
+Functions, whether named or anonymous, are _lexical closures_: any identifiers without a local binding must refer to bindings from a surrounding lexical scope. For example:
 
 ```moonbit live
 let y = 3
@@ -482,13 +483,13 @@ let e = not(a)
 
 MoonBit have integer type and floating point type:
 
-| type     | description                               |  example |
-| -------- | ----------------------------------------- | -------- |
-| `Int`    | 32-bit signed integer                     | `42`     |
-| `Int64`  | 64-bit signed integer                     | `1000L`  |
-| `UInt`   | 32-bit unsigned integer                   | `14U`    |
-| `UInt64` | 64-bit unsigned integer                   | `14UL`   |
-| `Double` | 64-bit floating point, defined by IEEE754 | `3.14`   |
+| type     | description                               | example |
+| -------- | ----------------------------------------- | ------- |
+| `Int`    | 32-bit signed integer                     | `42`    |
+| `Int64`  | 64-bit signed integer                     | `1000L` |
+| `UInt`   | 32-bit unsigned integer                   | `14U`   |
+| `UInt64` | 64-bit unsigned integer                   | `14UL`  |
+| `Double` | 64-bit floating point, defined by IEEE754 | `3.14`  |
 
 MoonBit also supports numeric literals, including decimal, binary, octal, and hexadecimal numbers.
 
@@ -1099,7 +1100,7 @@ fn reduce[S, T](self: List[S], op: (T, S) -> T, init: T) -> T {
 
 ## Access Control
 
-By default, all function definitions and variable bindings are *invisible* to other packages; types without modifiers are abstract data types, whose name is exported but the internals are invisible. This design prevents unintended exposure of implementation details. You can use the `pub` modifier before `type`/`enum`/`struct`/`let` or top-level function to make them fully visible, or put `priv` before `type`/`enum`/`struct` to make it fully invisible to other packages. You can also use `pub` or `priv` before field names to obtain finer-grained access control. However, it is important to note that:
+By default, all function definitions and variable bindings are _invisible_ to other packages; types without modifiers are abstract data types, whose name is exported but the internals are invisible. This design prevents unintended exposure of implementation details. You can use the `pub` modifier before `type`/`enum`/`struct`/`let` or top-level function to make them fully visible, or put `priv` before `type`/`enum`/`struct` to make it fully invisible to other packages. You can also use `pub` or `priv` before field names to obtain finer-grained access control. However, it is important to note that:
 
 - Struct fields cannot be defined as `pub` within an abstract or private struct since it makes no sense.
 - Enum constructors do not have individual visibility so you cannot use `pub` or `priv` before them.
@@ -1500,7 +1501,7 @@ trait Debug {
 
 ## Access control of methods and extension methods
 
-To make the trait system coherent (i.e. there is a globally unique implementation for every `Type: Trait` pair), and prevent third-party packages from modifying behavior of existing programs by accident, *only the package that defines a type can define methods for it*. So one cannot define new methods or override old methods for builtin and foreign types.
+To make the trait system coherent (i.e. there is a globally unique implementation for every `Type: Trait` pair), and prevent third-party packages from modifying behavior of existing programs by accident, _only the package that defines a type can define methods for it_. So one cannot define new methods or override old methods for builtin and foreign types.
 
 However, it is often useful to extend the functionality of an existing type. So MoonBit provides a mechanism called extension method, defined using the syntax `fn Trait::method_name(...) -> ...`. Extension methods extend the functionality of an existing type by implementing a trait. For example, to implement a new trait `ToMyBinaryProtocol` for builtin types, one can (and must) use extension methods:
 
@@ -1514,7 +1515,7 @@ fn ToMyBinaryProtocol::to_my_binary_protocol(x: Double, b: Buffer) -> Unit { ...
 fn ToMyBinaryProtocol::to_my_binary_protocol(x: String, b: Buffer) -> Unit { ... }
 ```
 
-When searching for the implementation of a trait, extension methods have a higher priority, so they can be used to override ordinary methods with undesirable behavior. Extension methods can only be used to implement the specified trait. They cannot be called directly like ordinary methods. Furthermore, *only the package of the type or the package of the trait can implement extension methods*. For example, only `@pkg1` and `@pkg2` are allowed to implement an extension method `@pkg1.Trait::f` for type `@pkg2.Type`. This restriction ensures that MoonBit's trait system is still coherent with the extra flexibility of extension methods.
+When searching for the implementation of a trait, extension methods have a higher priority, so they can be used to override ordinary methods with undesirable behavior. Extension methods can only be used to implement the specified trait. They cannot be called directly like ordinary methods. Furthermore, _only the package of the type or the package of the trait can implement extension methods_. For example, only `@pkg1` and `@pkg2` are allowed to implement an extension method `@pkg1.Trait::f` for type `@pkg2.Type`. This restriction ensures that MoonBit's trait system is still coherent with the extra flexibility of extension methods.
 
 To invoke an extension method directly, use the `Trait::method` syntax.
 
@@ -1664,7 +1665,7 @@ test "panic_test" {
 
 Doc comments are comments prefix with `///` in each line in the leading of toplevel structure like `fn`,`let`,`enum`,`struct`,`type`. The doc comments contains a markdown text and several pragmas.
 
-```moonbit
+````moonbit
 /// Return a new array with reversed elements.
 ///
 /// # Example
@@ -1675,11 +1676,11 @@ Doc comments are comments prefix with `///` in each line in the leading of tople
 fn reverse[T](xs : Array[T]) -> Array[T] {
   ...
 }
-```
+````
 
 ### Pragmas
 
-Pragmas are annotations inside doc comments. They all take the form `/// @word ...`. The *word* indicates the type of pragma and is followed optionally by several *word* or string literals. Pragmas do not normally affect the meaning of programs. Unrecognized pragmas will be reported as warnings.
+Pragmas are annotations inside doc comments. They all take the form `/// @word ...`. The _word_ indicates the type of pragma and is followed optionally by several _word_ or string literals. Pragmas do not normally affect the meaning of programs. Unrecognized pragmas will be reported as warnings.
 
 - Alert Pragmas
 

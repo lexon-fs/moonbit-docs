@@ -35,7 +35,7 @@ fn shortest_edit(a : Array[Line], b : Array[Line]) -> Array[(BPArray[Int], Int)]
         x = x + 1
         y = y + 1
       }
-      
+
       v[k] = x
       if x >= n && y >= m {
         return trace
@@ -74,17 +74,17 @@ fn backtrack(a : Array[Line], b : Array[Line], trace : Array[(BPArray[Int], Int)
 
 The method of backtracking is essentially the same as forward search, just in reverse.
 
-+ Calculate the current `k` value using `x` and `y`.
+- Calculate the current `k` value using `x` and `y`.
 
-+ Access the historical records and use the same judgment criteria as in forward search to find the `k` value at the previous search round.
+- Access the historical records and use the same judgment criteria as in forward search to find the `k` value at the previous search round.
 
-+ Restore the coordinates of the previous search round.
+- Restore the coordinates of the previous search round.
 
-+ Try free movement and record the corresponding edit actions.
+- Try free movement and record the corresponding edit actions.
 
-+ Determine the type of edit that caused the change in `k` value.
+- Determine the type of edit that caused the change in `k` value.
 
-+ Continue iterating.
+- Continue iterating.
 
 ```rust
   for i = trace.length() - 1; i >= 0; i = i - 1 {
@@ -162,8 +162,8 @@ fn print_edit(edit : Edit) -> String {
 
 fn print_diff(diff : Array[Edit]) -> Unit {
   for i = diff.length() - 1; i >= 0; i = i - 1 {
-    diff[i] 
-    |> print_edit 
+    diff[i]
+    |> print_edit
     |> println
   }
 }

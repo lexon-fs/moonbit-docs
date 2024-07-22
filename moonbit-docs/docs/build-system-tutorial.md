@@ -8,38 +8,38 @@ Before you begin with this tutorial, make sure you have installed the following:
 
 1. **MoonBit CLI Tools**: Download it from the [https://www.moonbitlang.com/download/](https://www.moonbitlang.com/download/). This command line tool is needed for creating and managing MoonBit projects.
 
-    Use `moon help` to view the usage instructions.
+   Use `moon help` to view the usage instructions.
 
-    ```bash
-    $ moon help
-    Moonbit's build system
+   ```bash
+   $ moon help
+   Moonbit's build system
 
-    Usage: moon <COMMAND>
+   Usage: moon <COMMAND>
 
-    Commands:
-      build     Build the current package
-      check     Check the current package, but don't build object files
-      run       Run WebAssembly module
-      clean     Remove the target directory
-      new       Create a new moonbit package
-      bench     Generate build matrix for benchmarking
-      fmt       Format moonbit
-      version   Print version info and exit
-      test      Run the tests
-      login     Log in to your account
-      register  Register an account on mooncakes.io
-      publish   Publish the current package
-      add       Add a new dependency
-      remove    Remove a dependency
-      tree      Display the dependency tree
-      update    Update index
-      doc       Generate documentation
-      install   Install dependencies
-      help      Print this message or the help of the given subcommand(s)
+   Commands:
+     build     Build the current package
+     check     Check the current package, but don't build object files
+     run       Run WebAssembly module
+     clean     Remove the target directory
+     new       Create a new moonbit package
+     bench     Generate build matrix for benchmarking
+     fmt       Format moonbit
+     version   Print version info and exit
+     test      Run the tests
+     login     Log in to your account
+     register  Register an account on mooncakes.io
+     publish   Publish the current package
+     add       Add a new dependency
+     remove    Remove a dependency
+     tree      Display the dependency tree
+     update    Update index
+     doc       Generate documentation
+     install   Install dependencies
+     help      Print this message or the help of the given subcommand(s)
 
-    Options:
-      -h, --help  Print help
-    ```
+   Options:
+     -h, --help  Print help
+   ```
 
 2. **Moonbit Language** plugin in Visual Studio Code: You can install it from the VS Code marketplace. This plugin provides a rich development environment for MoonBit, including functionalities like syntax highlighting, code completion, and more.
 
@@ -87,9 +87,7 @@ Here's a brief explanation of the directory structure:
     ```json
     {
       "is_main": true,
-      "import": [
-        "username/hello/lib"
-      ]
+      "import": ["username/hello/lib"]
     }
     ```
 
@@ -123,31 +121,31 @@ Our `username/hello` module contains two packages: `lib` and `main`.
 
 The `lib` package contains `hello.mbt` and `hello_test.mbt` files:
 
-  `hello.mbt`
+`hello.mbt`
 
-  ```moonbit
-  pub fn hello() -> String {
-      "Hello, world!"
+```moonbit
+pub fn hello() -> String {
+    "Hello, world!"
+}
+```
+
+`hello_test.mbt`
+
+```moonbit
+test "hello" {
+  if hello() != "Hello, world!" {
+    return Err("hello() != \"Hello, world!\"")
   }
-  ```
-
-  `hello_test.mbt`
-
-  ```moonbit
-  test "hello" {
-    if hello() != "Hello, world!" {
-      return Err("hello() != \"Hello, world!\"")
-    }
-  }
-  ```
+}
+```
 
 The `main` package contains a `main.mbt` file:
 
-  ```moonbit
-  fn main {
-    println(@lib.hello())
-  }
-  ```
+```moonbit
+fn main {
+  println(@lib.hello())
+}
+```
 
 To execute the program, specify the path to the `main` package in the `moon run` command:
 
@@ -178,9 +176,7 @@ To import the `lib` package in `main/main.mbt`, you need to specify it in `main/
 ```json
 {
   "is_main": true,
-  "import": [
-    "username/hello/lib"
-  ]
+  "import": ["username/hello/lib"]
 }
 ```
 
