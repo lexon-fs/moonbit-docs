@@ -20,7 +20,7 @@
     "description": "The ARIA label for the main navigation"
   },
   "theme.NavbarItem.GithubButton.starUs": {
-    "message": "Star us"
+    "message": "关注我们"
   },
   "theme.navbar.mobileLanguageDropdown.label": {
     "message": "选择语言",
