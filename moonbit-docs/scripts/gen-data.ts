@@ -2,7 +2,6 @@ import fs from 'node:fs/promises'
 import * as utils from '../lib/utils.js'
 import path from 'node:path'
 import * as process from 'process'
-
 ;(async () => {
   const githubStars = await utils.getGithubStars()
   const contributors = await utils.getContributors()
