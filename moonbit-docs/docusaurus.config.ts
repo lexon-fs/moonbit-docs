@@ -79,7 +79,8 @@ const config: Config = {
       hideOnScroll: true,
       logo: {
         alt: 'MoonBit Logo',
-        src: 'img/logo.png'
+        src: 'img/logo.png',
+        href: 'https://www.moonbitlang.com'
       },
       items: [
         {
@@ -305,9 +306,6 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    customFields: {
-      GITHUB_ACCESS_TOKEN: process.env.GITHUB_ACCESS_TOKEN,
-    }
   } satisfies Preset.ThemeConfig,
 };
 
