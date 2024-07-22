@@ -1,9 +1,9 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
-import fs from "node:fs/promises";
-import rehypeShiki, {RehypeShikiOptions} from "@shikijs/rehype";
-import {bundledLanguages} from 'shiki';
+import { themes as prismThemes } from 'prism-react-renderer'
+import type { Config } from '@docusaurus/types'
+import type * as Preset from '@docusaurus/preset-classic'
+import fs from 'node:fs/promises'
+import rehypeShiki, { RehypeShikiOptions } from '@shikijs/rehype'
+import { bundledLanguages } from 'shiki'
 
 const rehypeShikiPlugin = [
   rehypeShiki,
@@ -13,10 +13,13 @@ const rehypeShikiPlugin = [
       dark: 'github-dark',
     },
     langs: [
-      ...(Object.keys(bundledLanguages) as Array<keyof typeof bundledLanguages>),
-      async () => JSON.parse(await fs.readFile('./languages/moonbit.tmLanguage.json', 'utf-8')),
-      async () => JSON.parse(await fs.readFile('./languages/abnf.tmLanguage.json', 'utf-8')),
-      async () => JSON.parse(await fs.readFile('./languages/gitignore.tmLanguage.json', 'utf-8')),
+      ...(Object.keys(bundledLanguages) as Array<
+        keyof typeof bundledLanguages
+      >),
+      async () =>
+        JSON.parse(
+          await fs.readFile('./languages/moonbit.tmLanguage.json', 'utf-8')
+        )
     ],
     onError: (error) => {
       console.log(error)
@@ -30,7 +33,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://docs.moonbitlang.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -59,11 +62,7 @@ const config: Config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: './sidebars.ts',
-          rehypePlugins: [
-            rehypeShikiPlugin,
-          ],
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          rehypePlugins: [rehypeShikiPlugin]
         },
         theme: {
           customCss: './src/css/custom.css',
