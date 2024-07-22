@@ -18,7 +18,8 @@
     "postinstallold": "pnpm data",
     "data": "tsx ./scripts/gen-data.ts",
     "preinstall": "pnpm -r --filter @shikijs/rehype run build",
-    "postinstall": "pnpm data && cp ./node_modules/@moonbit/moonpad/dist/lsp-server.js ./static/lsp-server.js"
+    "postinstall": "pnpm data && cp ./node_modules/@moonbit/moonpad/dist/lsp-server.js ./static/lsp-server.js",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@docusaurus/core": "3.4.0",
@@ -40,6 +41,7 @@
     "@shikijs/rehype": "workspace:^",
     "@types/node": "^20.14.11",
     "@types/react": "^18.2.0",
+    "prettier": "3.3.3",
     "shiki": "^1.10.3",
     "tsx": "^4.9.3",
     "typescript": "~5.2.2"
