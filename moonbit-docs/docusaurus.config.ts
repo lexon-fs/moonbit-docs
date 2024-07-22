@@ -38,11 +38,6 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'moonbit', // Usually your GitHub org/user name.
-  projectName: 'MoonBit-Docs', // Usually your repo name.
-
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
@@ -301,12 +296,8 @@ const config: Config = {
         }
       ],
       copyright: `Copyright © ${new Date().getFullYear()} MoonBit`
-    },
-    prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula
     }
-  } satisfies Preset.ThemeConfig
+  }
 }
 
 export default config
