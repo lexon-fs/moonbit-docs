@@ -1,17 +1,16 @@
 # Writing documents
 
-## 1. create a new documents
+## 1. Create a new documents
 
-Adding a New Document to Moonbit Docs
-To add a new document to the Moonbit documentation site, follow these steps:
+To add a new document to the MoonBit documentation site, follow these steps:
 
-1. Create and Move Your Markdown File
-   For English Documents:
-2. Create a new Markdown file with your document content.
-   Move it to the appropriate location within the English documentation folder:
+For English Documents:
+
+1. Create a new Markdown file with your document content.
+2. Move it to the appropriate location within the English documentation folder:
 
 ```
-moonbit-docs\docs\your\english\path\yourenglishdocs.md
+moonbit-docs/docs/your/english/path/yourenglishdocs.md
 ```
 
 For Chinese Documents:
@@ -20,7 +19,7 @@ For Chinese Documents:
 2. Move it to the corresponding location within the Chinese documentation folder, mirroring the English folder structure:
 
 ```
-moonbit-docs\i18n\zh\docusaurus-plugin-content-docs\current\your\english\path\yourchinesedocs.md
+moonbit-docs/i18n/zh/docusaurus-plugin-content-docs/current/your/english/path/yourenglishdocs.md
 ```
 
 **Note**: If you only create an English document, it will also be displayed on the Chinese site by default.
