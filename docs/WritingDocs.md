@@ -1,47 +1,53 @@
 # Writing documents
 
-## create a new documents
+## 1. create a new documents
 
-create a new markdown file and move it into the `moonbit-docs\docs`.
-The website will create the new post,The default folder is the English website folder.
+Adding a New Document to Moonbit Docs
+To add a new document to the Moonbit documentation site, follow these steps:
 
-If you want to create a new chinese documents, you should move the chinese markdown file to
-the `moonbit-docs\i18n\zh\docusaurus-plugin-content-docs\current`.The file path is the same path as the english
-path.e.g.
-
-English path:
+1. Create and Move Your Markdown File
+   For English Documents:
+   
+2. Create a new Markdown file with your document content.
+   Move it to the appropriate location within the English documentation folder:
 
 ```
 moonbit-docs\docs\your\english\path\yourenglishdocs.md
 ```
 
-Chinese path:
+For Chinese Documents:
+1. Create a new Markdown file with your document content in Chinese.
+2. Move it to the corresponding location within the Chinese documentation folder, mirroring the English folder structure:
 
 ```
 moonbit-docs\i18n\zh\docusaurus-plugin-content-docs\current\your\english\path\yourchinesedocs.md
 ```
 
-If you create only English documents, the Chinese site will display the English documents you create.
+**Note**: If you only create an English document, it will also be displayed on the Chinese site by default.
 
-## Add the document link to the sidebar
+## 2. Add the Document Link to the Sidebar
 
-Once you have completed your document, you can add a link in `sidebar.ts` to make your document appear on the document
-sidebar.
+After creating your document, you need to add a link to it in the sidebar configuration file to make it appear in the documentation sidebar.
 
-How to add it and more detail,please see the [sidebar config](https://docusaurus.io/docs/sidebar/items).
+1. Open the sidebar.ts file located at:
+```shell
+moonbit-docs/sidebar.ts
+```
+2. Add a link to your new document by following the sidebar [configuration guide](https://docusaurus.io/docs/sidebar/items).
 
-the configure file is in the:`moonbit-docs\sidebar.ts`
 
-## How to see the results of your document displayed on the page
+## 3. Preview Your Document
+**For the English Site:**
 
-Default(English):
-
+To see the English version of your document:
 ```shell
 cd moonbit-docs
 pnpm start
 ```
 
-Chinese:
+**For the Chinese Site:**
+
+To see the Chinese version of your document:
 
 ```shell
 cd moonbit-docs
