@@ -36,7 +36,7 @@ $ pnpm buildzh
 
 This command generates chinese static content into the `build` directory and can be served using any static contents hosting service.It will overwrite the `build` code generation.If you run the `build` command before.
 
-Switch to the `build` fold and then you can use:
+Switch to the `build` folder and then you can use:
 
 ```shell
 pnpm run serve
@@ -54,4 +54,4 @@ This command generates the rewrite theme components code,the theme components ar
 
 ## How to use
 
-please see the `docs` at project fold before you add the new moonbit docs.
+please see the `docs` at project folder before you add the new moonbit docs.
