@@ -1,0 +1,11 @@
+{
+  "name": "website-moonbit-docs",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "format": "prettier . --write"
+  },
+  "devDependencies": {
+    "prettier": "3.3.3"
+  }
+}
