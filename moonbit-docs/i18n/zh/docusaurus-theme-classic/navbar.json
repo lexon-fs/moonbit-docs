@@ -43,16 +43,20 @@
     "message": "试用",
     "description": "Navbar item with label 试用"
   },
-  "item.label.论坛": {
-    "message": "论坛",
-    "description": "Navbar item with label 论坛"
-  },
-  "item.label.Forum": {
-    "message": "Forum",
-    "description": "Navbar item with label Forum"
+  "item.label.社区": {
+    "message": "社区",
+    "description": "Navbar item with label 社区"
   },
   "item.label.Contributor": {
     "message": "Contributor",
     "description": "Navbar item with label Contributor"
+  },
+  "item.label.贡献者": {
+    "message": "贡献者",
+    "description": "Navbar item with label 贡献者"
+  },
+  "item.label.活动": {
+    "message": "活动",
+    "description": "Navbar item with label 活动"
   }
 }
